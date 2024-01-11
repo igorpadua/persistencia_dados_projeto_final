@@ -92,7 +92,17 @@
         <%
             List<Alergia> alergias = (List<Alergia>) request.getAttribute("alergias");
             for (Alergia alergia : alergias) {
-                out.println("<input type='checkbox' name='alergia' value='" + alergia.getId() + "'>" + alergia.getNome() + "<br>");
+                boolean possuiAlergia = false;
+                for (Alergia alergiaUsuario : usuario.getAlergia()) {
+                    if (alergia.getId().equals(alergiaUsuario.getId())) {
+                        possuiAlergia = true;
+                    }
+                }
+                if (possuiAlergia) {
+                    out.println("<input type='checkbox' name='alergia' value='" + alergia.getId() + "' checked>" + alergia.getNome() + "<br>");
+                } else {
+                    out.println("<input type='checkbox' name='alergia' value='" + alergia.getId() + "'>" + alergia.getNome() + "<br>");
+                }
             }
         %>
     </div>

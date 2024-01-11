@@ -122,12 +122,11 @@ public class UsuarioController extends HttpServlet {
         usuario.setSexo(request.getParameter("sexo").charAt(0));
         usuario.setDataNascimento(FormatterDate.stringToDate(request.getParameter("dataNascimento")));
 
-        Set<Alergia> alergias = usuario.getAlergia();
+        Set<Alergia> alergias = new HashSet<>();
         String[] alergiasChecked = request.getParameterValues("alergia");
         if (alergiasChecked != null) {
             for (String alergia : alergiasChecked) {
-                Alergia alergiaObj = new Alergia();
-                alergiaObj.setId(Long.parseLong(alergia));
+                Alergia alergiaObj = alergiaService.buscarPorId(Long.parseLong(alergia));
                 alergias.add(alergiaObj);
             }
         }
