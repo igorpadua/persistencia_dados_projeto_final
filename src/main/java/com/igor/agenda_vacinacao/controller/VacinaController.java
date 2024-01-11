@@ -11,7 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
 
 @WebServlet("/vacina")
 public class VacinaController extends HttpServlet {
@@ -24,8 +23,12 @@ public class VacinaController extends HttpServlet {
             case "listar":
                 listar(request, response);
                 break;
+            case "excluir":
+                excluir(request, response);
+                break;
         }
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tipoAcao = request.getParameter("acao");
@@ -54,4 +57,11 @@ public class VacinaController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
+    private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Vacina vacina = vacinaService.buscarPorId(id);
+        vacinaService.remover(vacina);
+        request.setAttribute("vacinaExcluido", vacina.getTitulo());
+        listar(request, response);
+    }
 }
