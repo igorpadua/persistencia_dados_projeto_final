@@ -33,5 +33,6 @@
     %>
     </tbody>
 </table>
+<a href="/agenda_vacinacao_war_exploded">Voltar</a>
 </body>
 </html>
