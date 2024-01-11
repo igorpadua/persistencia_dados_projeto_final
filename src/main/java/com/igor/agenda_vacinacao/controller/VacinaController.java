@@ -2,6 +2,7 @@ package com.igor.agenda_vacinacao.controller;
 
 import com.igor.agenda_vacinacao.model.Vacina;
 import com.igor.agenda_vacinacao.service.VacinaService;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -9,6 +10,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Set;
 
 @WebServlet("/vacina")
 public class VacinaController extends HttpServlet {
@@ -16,8 +19,13 @@ public class VacinaController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String tipoAcao = request.getParameter("acao");
+        switch (tipoAcao) {
+            case "listar":
+                listar(request, response);
+                break;
+        }
     }
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String tipoAcao = request.getParameter("acao");
@@ -26,7 +34,7 @@ public class VacinaController extends HttpServlet {
         }
     }
 
-    private void salvar(HttpServletRequest request, HttpServletResponse response) {
+    private void salvar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Vacina vacina = new Vacina();
         vacina.setTitulo(request.getParameter("titulo"));
         vacina.setDescricao(request.getParameter("descricao"));
@@ -36,5 +44,14 @@ public class VacinaController extends HttpServlet {
 
         vacinaService.salvar(vacina);
         request.setAttribute("vacinaSalvo", vacina.getTitulo());
+        listar(request, response);
     }
+    private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Vacina> vacinas = vacinaService.buscarTodos();
+        request.setAttribute("vacinas", vacinas);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("vacina/listarVacina.jsp");
+        dispatcher.forward(request, response);
+    }
+
 }
