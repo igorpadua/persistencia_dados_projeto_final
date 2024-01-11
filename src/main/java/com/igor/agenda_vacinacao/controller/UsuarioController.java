@@ -138,10 +138,10 @@ public class UsuarioController extends HttpServlet {
 
     public void alergias(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Long id = Long.parseLong(request.getParameter("id"));
-        Set<Alergia> alergiasSet = usuarioService.buscarPorId(id).getAlergia();
-        List<Alergia> alergias = Arrays.asList(alergiasSet.toArray(new Alergia[0]));
+        Set<Alergia> alergias = usuarioService.buscarPorId(id).getAlergia();
         request.setAttribute("alergias", alergias);
-        RequestDispatcher rd = request.getRequestDispatcher("alergia/listarAlergia.jsp");
+        request.setAttribute("nome", usuarioService.buscarPorId(id).getNome());
+        RequestDispatcher rd = request.getRequestDispatcher("usuario/listaAlergiaUsuario.jsp");
         rd.forward(request, response);
     }
 }
