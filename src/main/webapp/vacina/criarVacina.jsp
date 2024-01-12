@@ -31,6 +31,7 @@
     <div class="form-group">
         <label for="periodicidade">periodicidade</label>
         <select class="form-control" id="periodicidade" name="periodicidade">
+            <option value="0">Unica</option>
             <option value="1">Diaria</option>
             <option value="2">Semanal</option>
             <option value="3">Mensal</option>

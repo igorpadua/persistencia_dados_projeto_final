@@ -35,6 +35,7 @@
     <div class="form-group">
         <label for="periodicidade">periodicidade</label>
         <select class="form-control" id="periodicidade" name="periodicidade">
+            <option value="0" <%=vacina.getPeriodicidade() == 0 ? "selected" : ""%>>Unica</option>
             <option value="1" <%=vacina.getPeriodicidade() == 1 ? "selected" : ""%>>Diaria</option>
             <option value="2" <%=vacina.getPeriodicidade() == 2 ? "selected" : ""%>>Semanal</option>
             <option value="3" <%=vacina.getPeriodicidade() == 3 ? "selected" : ""%>>Mensal</option>
