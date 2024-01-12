@@ -1,8 +1,13 @@
 package com.igor.agenda_vacinacao.controller;
 
 import com.igor.agenda_vacinacao.model.Agenda;
+import com.igor.agenda_vacinacao.model.Situacao;
+import com.igor.agenda_vacinacao.model.Usuario;
+import com.igor.agenda_vacinacao.model.Vacina;
 import com.igor.agenda_vacinacao.service.AgendaService;
-import jakarta.servlet.RequestDispatcher;
+import com.igor.agenda_vacinacao.service.UsuarioService;
+import com.igor.agenda_vacinacao.service.VacinaService;
+import com.igor.agenda_vacinacao.util.FormatterDate;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,25 +15,57 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.List;
 
-@WebServlet(name = "/api/angenda")
+@WebServlet("/agenda")
 public class AgendaController extends HttpServlet {
-    private final AgendaService service = new AgendaService();
+    private final AgendaService agendaService = new AgendaService();
+
+    private final UsuarioService usuarioService = new UsuarioService();
+    private final VacinaService vacinaService = new VacinaService();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String tipoAcao = req.getParameter("acao");
-        if (tipoAcao.equals("listar")) {
-            listar(req, resp);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String tipoAcao = request.getParameter("acao");
+        switch (tipoAcao) {
+            case "usuariosVacinas":
+                usuariosVacinas(request, response);
+                break;
         }
     }
 
-    private void listar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Agenda> agendas = service.buscarTodos();
-        req.setAttribute("agendas", agendas);
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String tipoAcao = request.getParameter("acao");
+        switch (tipoAcao) {
+            case "salvar":
+                salvar(request, response);
+                break;
+        }
+    }
 
-        RequestDispatcher rd = req.getRequestDispatcher("listarAgendas.jsp");
-        rd.forward(req, resp);
+    private void usuariosVacinas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Usuario> usuarios = usuarioService.buscarTodos();
+        List<Vacina> vacinas = vacinaService.buscarTodos();
+        request.setAttribute("usuarios", usuarios);
+        request.setAttribute("vacinas", vacinas);
+
+        request.getRequestDispatcher("agenda/criarAgenda.jsp").forward(request, response);
+    }
+
+    private void salvar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Agenda agenda = new Agenda();
+        agenda.setData(FormatterDate.stringToDate(request.getParameter("data")));
+        int hora = Integer.parseInt(request.getParameter("hora").substring(0, 2));
+        int minuto = Integer.parseInt(request.getParameter("hora").substring(3, 5));
+        agenda.setHora(new Time(hora, minuto, 0));
+        agenda.setSituacao(Situacao.valueOf(request.getParameter("situacao")));
+        agenda.setDataSituacao(FormatterDate.stringToDate(request.getParameter("dataSituacao")));
+        agenda.setObservacao(request.getParameter("observacao"));
+        agenda.setUsuario(usuarioService.buscarPorId(Long.parseLong(request.getParameter("usuario"))));
+        agenda.setVacina(vacinaService.buscarPorId(Long.parseLong(request.getParameter("vacina"))));
+
+        agendaService.salvar(agenda);
     }
 }
