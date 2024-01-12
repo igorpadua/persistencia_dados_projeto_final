@@ -38,7 +38,20 @@
             out.println("<td>" + vacina.getTitulo() + "</td>");
             out.println("<td>" + vacina.getDescricao() + "</td>");
             out.println("<td>" + vacina.getDoses() + "</td>");
-            out.println("<td>" + vacina.getPeriodicidade() + "</td>");
+
+            String periodicidade = "";
+
+            if(vacina.getPeriodicidade() == 1){
+                periodicidade = "Diaria";
+            }else if(vacina.getPeriodicidade() == 2){
+                periodicidade = "Semanal";
+            } else if(vacina.getPeriodicidade() == 3){
+                periodicidade = "Mensal";
+            } else if(vacina.getPeriodicidade() == 4){
+                periodicidade = "Anual";
+            }
+
+            out.println("<td>" + periodicidade + "</td>");
             out.println("<td>" + vacina.getIntervalo() + "</td>");
             out.println("<td><a href='?acao=editar&id=" + vacina.getId() + "'>Editar</a></td>");
             out.println("<td><a href='?acao=excluir&id=" + vacina.getId() + "'>Excluir</a></td>");

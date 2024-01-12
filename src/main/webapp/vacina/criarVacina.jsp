@@ -30,7 +30,12 @@
     </div>
     <div class="form-group">
         <label for="periodicidade">periodicidade</label>
-        <input type="number" class="form-control" id="periodicidade" name="periodicidade" value="0">
+        <select class="form-control" id="periodicidade" name="periodicidade">
+            <option value="1">Diaria</option>
+            <option value="2">Semanal</option>
+            <option value="3">Mensal</option>
+            <option value="4">Anual</option>
+        </select>
     </div>
     <div class="form-group">
         <label for="intervalo">Intervalo</label>
