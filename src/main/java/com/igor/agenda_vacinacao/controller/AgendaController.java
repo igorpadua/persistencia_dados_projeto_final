@@ -32,6 +32,9 @@ public class AgendaController extends HttpServlet {
             case "usuariosVacinas":
                 usuariosVacinas(request, response);
                 break;
+            case "listar":
+                listar(request, response);
+                break;
         }
     }
 
@@ -67,5 +70,11 @@ public class AgendaController extends HttpServlet {
         agenda.setVacina(vacinaService.buscarPorId(Long.parseLong(request.getParameter("vacina"))));
 
         agendaService.salvar(agenda);
+    }
+
+    private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Agenda> agendas = agendaService.buscarTodos();
+        request.setAttribute("agendas", agendas);
+        request.getRequestDispatcher("agenda/listarAgenda.jsp").forward(request, response);
     }
 }
