@@ -1,10 +1,4 @@
-<%@ page import="com.igor.agenda_vacinacao.model.Alergia" %><%--
-  Created by IntelliJ IDEA.
-  User: igorpadua
-  Date: 10/01/2024
-  Time: 10:54
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.igor.agenda_vacinacao.model.Alergia" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

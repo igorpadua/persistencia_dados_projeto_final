@@ -1,6 +1,5 @@
 package com.igor.agenda_vacinacao.controller;
 
-import com.igor.agenda_vacinacao.dao.AlergiaDAO;
 import com.igor.agenda_vacinacao.model.Alergia;
 import com.igor.agenda_vacinacao.model.Usuario;
 import com.igor.agenda_vacinacao.service.AlergiaService;
@@ -14,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

@@ -1,12 +1,6 @@
 <%@ page import="com.igor.agenda_vacinacao.model.Agenda" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.igor.agenda_vacinacao.util.FormatterDate" %><%--
-  Created by IntelliJ IDEA.
-  User: igorpadua
-  Date: 12/01/2024
-  Time: 15:07
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.igor.agenda_vacinacao.util.FormatterDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -44,7 +38,7 @@
             out.println("<td>" + agenda.getObservacao() + "</td>");
             out.println("<td>" + agenda.getUsuario().getNome() + "</td>");
             out.println("<td>" + agenda.getVacina().getTitulo() + "</td>");
-            out.println("<td><a href='/agenda_vacinacao_war_exploded/agenda?editar?id=" + agenda.getId() + "'>Editar</a></td>");
+            out.println("<td><a href='/agenda_vacinacao_war_exploded/agenda?acao=editar&id=" + agenda.getId() + "'>Editar</a></td>");
             out.println("<td><a href='/agenda_vacinacao_war_exploded/agenda?acao=excluir&id=" + agenda.getId() + "'>Excluir</a></td>");
         }
     %>

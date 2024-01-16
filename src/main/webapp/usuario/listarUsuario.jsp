@@ -1,12 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.igor.agenda_vacinacao.model.Usuario" %>
-<%@ page import="com.igor.agenda_vacinacao.util.FormatterDate" %><%--
-  Created by IntelliJ IDEA.
-  User: igorpadua
-  Date: 08/01/2024
-  Time: 14:10
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.igor.agenda_vacinacao.util.FormatterDate" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

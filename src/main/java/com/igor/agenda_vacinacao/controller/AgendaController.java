@@ -38,9 +38,11 @@ public class AgendaController extends HttpServlet {
             case "excluir":
                 excluir(request, response);
                 break;
+            case "editar":
+                buscaAgendaUsuarioVacina(request, response);
+                break;
         }
     }
-
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -48,6 +50,9 @@ public class AgendaController extends HttpServlet {
         switch (tipoAcao) {
             case "salvar":
                 salvar(request, response);
+                break;
+            case "alterar":
+                alteraAgenda(request, response);
                 break;
         }
     }
@@ -88,6 +93,35 @@ public class AgendaController extends HttpServlet {
         Agenda agenda = agendaService.buscarPorId(id);
         agendaService.remover(agenda);
         request.setAttribute("agendaExcluida", agenda.getId());
+        listar(request, response);
+    }
+
+    private void buscaAgendaUsuarioVacina(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Agenda agenda = agendaService.buscarPorId(id);
+        request.setAttribute("agenda", agenda);
+
+        List<Usuario> usuarios = usuarioService.buscarTodos();
+        List<Vacina> vacinas = vacinaService.buscarTodos();
+        request.setAttribute("usuarios", usuarios);
+        request.setAttribute("vacinas", vacinas);
+
+        request.getRequestDispatcher("agenda/editarAgenda.jsp").forward(request, response);
+    }
+
+    private void alteraAgenda(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Agenda agenda = agendaService.buscarPorId(Long.parseLong(request.getParameter("id")));
+        agenda.setData(FormatterDate.stringToDate(request.getParameter("data")));
+        int hora = Integer.parseInt(request.getParameter("hora").substring(0, 2));
+        int minuto = Integer.parseInt(request.getParameter("hora").substring(3, 5));
+        agenda.setHora(new Time(hora, minuto, 0));
+        agenda.setSituacao(Situacao.valueOf(request.getParameter("situacao")));
+        agenda.setDataSituacao(FormatterDate.stringToDate(request.getParameter("dataSituacao")));
+        agenda.setObservacao(request.getParameter("observacao"));
+        agenda.setUsuario(usuarioService.buscarPorId(Long.parseLong(request.getParameter("usuario"))));
+        agenda.setVacina(vacinaService.buscarPorId(Long.parseLong(request.getParameter("vacina"))));
+
+        agendaService.atualizar(agenda);
         listar(request, response);
     }
 }
