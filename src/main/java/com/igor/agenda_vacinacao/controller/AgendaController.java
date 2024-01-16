@@ -35,8 +35,12 @@ public class AgendaController extends HttpServlet {
             case "listar":
                 listar(request, response);
                 break;
+            case "excluir":
+                excluir(request, response);
+                break;
         }
     }
+
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -70,11 +74,20 @@ public class AgendaController extends HttpServlet {
         agenda.setVacina(vacinaService.buscarPorId(Long.parseLong(request.getParameter("vacina"))));
 
         agendaService.salvar(agenda);
+        listar(request, response);
     }
 
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Agenda> agendas = agendaService.buscarTodos();
         request.setAttribute("agendas", agendas);
         request.getRequestDispatcher("agenda/listarAgenda.jsp").forward(request, response);
+    }
+
+    private void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Long id = Long.parseLong(request.getParameter("id"));
+        Agenda agenda = agendaService.buscarPorId(id);
+        agendaService.remover(agenda);
+        request.setAttribute("agendaExcluida", agenda.getId());
+        listar(request, response);
     }
 }

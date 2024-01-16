@@ -44,6 +44,8 @@
             out.println("<td>" + agenda.getObservacao() + "</td>");
             out.println("<td>" + agenda.getUsuario().getNome() + "</td>");
             out.println("<td>" + agenda.getVacina().getTitulo() + "</td>");
+            out.println("<td><a href='/agenda_vacinacao_war_exploded/agenda?editar?id=" + agenda.getId() + "'>Editar</a></td>");
+            out.println("<td><a href='/agenda_vacinacao_war_exploded/agenda?acao=excluir&id=" + agenda.getId() + "'>Excluir</a></td>");
         }
     %>
     </tbody>
