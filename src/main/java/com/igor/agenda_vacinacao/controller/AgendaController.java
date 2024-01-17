@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet("/agenda")
@@ -40,6 +41,9 @@ public class AgendaController extends HttpServlet {
                 break;
             case "editar":
                 buscaAgendaUsuarioVacina(request, response);
+                break;
+            case "listaFiltrada":
+                listaFiltrada(request, response);
                 break;
         }
     }
@@ -85,6 +89,7 @@ public class AgendaController extends HttpServlet {
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Agenda> agendas = agendaService.buscarTodos();
         request.setAttribute("agendas", agendas);
+        request.setAttribute("filtro", "Todos");
         request.getRequestDispatcher("agenda/listarAgenda.jsp").forward(request, response);
     }
 
@@ -123,5 +128,48 @@ public class AgendaController extends HttpServlet {
 
         agendaService.atualizar(agenda);
         listar(request, response);
+    }
+
+    private void listaFiltrada(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String filtro = request.getParameter("filtro");
+        List<Agenda> agendas = agendaService.buscarTodos();
+
+        switch (filtro) {
+            case "Agendado":
+                agendas.removeIf(agenda -> !agenda.getSituacao().equals(Situacao.AGENDADO));
+                break;
+            case "Realizado":
+                agendas.removeIf(agenda -> !agenda.getSituacao().equals(Situacao.REALIZADO));
+                break;
+            case "Cancelado":
+                agendas.removeIf(agenda -> !agenda.getSituacao().equals(Situacao.CANCELADO));
+                break;
+            case "DiaCorrente":
+                agendas.removeIf(agenda -> !FormatterDate.dateToString(new Date()).equals(FormatterDate.dateToString(agenda.getData())));
+
+                agendas.sort((agenda1, agenda2) -> {
+                    if (agenda1.getSituacao().equals(Situacao.AGENDADO) && agenda2.getSituacao().equals(Situacao.REALIZADO)) {
+                        return -1;
+                    } else if (agenda1.getSituacao().equals(Situacao.REALIZADO) && agenda2.getSituacao().equals(Situacao.AGENDADO)) {
+                        return 1;
+                    } else if (agenda1.getSituacao().equals(Situacao.AGENDADO) && agenda2.getSituacao().equals(Situacao.CANCELADO)) {
+                        return -1;
+                    } else if (agenda1.getSituacao().equals(Situacao.CANCELADO) && agenda2.getSituacao().equals(Situacao.AGENDADO)) {
+                        return 1;
+                    } else if (agenda1.getSituacao().equals(Situacao.REALIZADO) && agenda2.getSituacao().equals(Situacao.CANCELADO)) {
+                        return -1;
+                    } else if (agenda1.getSituacao().equals(Situacao.CANCELADO) && agenda2.getSituacao().equals(Situacao.REALIZADO)) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                });
+
+                break;
+        }
+
+        request.setAttribute("agendas", agendas);
+        request.setAttribute("filtro", filtro);
+        request.getRequestDispatcher("agenda/listarAgenda.jsp").forward(request, response);
     }
 }

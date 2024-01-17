@@ -5,11 +5,27 @@
 <html>
 <head>
     <title>Lista de Agendas</title>
+    <%
+        String filtroAtual = (String) request.getAttribute("filtro");
+    %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </head>
 <body>
 <h1>Lista de Agendas</h1>
+<form action="/agenda_vacinacao_war_exploded/agenda?acao=listaFiltrada" method="get">
+    <input type="hidden" name="acao" value="listaFiltrada">
+    <select name="filtro" id="filtro" class="form-select">
+        <option value="Todos" <%=filtroAtual.equals("Todos") ? "selected" : ""%>>Todos</option>
+        <option value="Agendado" <%=filtroAtual.equals("Agendado") ? "selected" : ""%>>Agendado</option>
+        <option value="Realizado" <%=filtroAtual.equals("Realizado") ? "selected" : ""%>>Realizado</option>
+        <option value="Cancelado" <%=filtroAtual.equals("Cancelado") ? "selected" : ""%>>Cancelado</option>
+        <option value="DiaCorrente" <%=filtroAtual.equals("DiaCorrente") ? "selected" : ""%>>Dia corrente</option>
+
+    </select>
+    <input type="submit" value="Filtrar" class="btn btn btn-primary">
+</form>
+
 <table class="table">
     <thead>
     <tr>
