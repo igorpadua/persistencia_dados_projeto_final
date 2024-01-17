@@ -121,7 +121,13 @@ public class AgendaController extends HttpServlet {
         int minuto = Integer.parseInt(request.getParameter("hora").substring(3, 5));
         agenda.setHora(new Time(hora, minuto, 0));
         agenda.setSituacao(Situacao.valueOf(request.getParameter("situacao")));
-        agenda.setDataSituacao(FormatterDate.stringToDate(request.getParameter("dataSituacao")));
+
+        if (agenda.getSituacao().equals(Situacao.REALIZADO) || agenda.getSituacao().equals(Situacao.CANCELADO)) {
+            agenda.setDataSituacao(new Date());
+        } else {
+            agenda.setDataSituacao(FormatterDate.stringToDate(request.getParameter("dataSituacao")));
+        }
+
         agenda.setObservacao(request.getParameter("observacao"));
         agenda.setUsuario(usuarioService.buscarPorId(Long.parseLong(request.getParameter("usuario"))));
         agenda.setVacina(vacinaService.buscarPorId(Long.parseLong(request.getParameter("vacina"))));
