@@ -33,7 +33,7 @@
         <th scope="col">Data</th>
         <th scope="col">Hora</th>
         <th scope="col">Situação</th>
-        <th scope="col">Data stiuação</th>
+        <th scope="col">Data situação</th>
         <th scope="col">Observação</th>
         <th scope="col">Usuário</th>
         <th scope="col">Vacina</th>
