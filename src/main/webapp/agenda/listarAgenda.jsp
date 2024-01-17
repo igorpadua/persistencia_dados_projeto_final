@@ -13,6 +13,14 @@
 </head>
 <body>
 <h1>Lista de Agendas</h1>
+
+<%--pesquisar--%>
+<form action="/agenda_vacinacao_war_exploded/agenda?acao=pesquisar" method="get">
+    <input type="hidden" name="acao" value="pesquisar">
+    <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar usuário" class="form-control">
+    <input type="submit" value="Pesquisar" class="btn btn btn-primary">
+</form>
+
 <form action="/agenda_vacinacao_war_exploded/agenda?acao=listaFiltrada" method="get">
     <input type="hidden" name="acao" value="listaFiltrada">
     <select name="filtro" id="filtro" class="form-select">
@@ -37,6 +45,7 @@
         <th scope="col">Observação</th>
         <th scope="col">Usuário</th>
         <th scope="col">Vacina</th>
+        <th scope="col">Dose</th>
         <th scope="col">Editar</th>
         <th scope="col">Excluir</th>
     </tr>
@@ -54,6 +63,7 @@
             out.println("<td>" + agenda.getObservacao() + "</td>");
             out.println("<td>" + agenda.getUsuario().getNome() + "</td>");
             out.println("<td>" + agenda.getVacina().getTitulo() + "</td>");
+            out.println("<td>" + agenda.getVacina().getDoses() + "</td>");
             out.println("<td><a href='/agenda_vacinacao_war_exploded/agenda?acao=editar&id=" + agenda.getId() + "'>Editar</a></td>");
             out.println("<td><a href='/agenda_vacinacao_war_exploded/agenda?acao=excluir&id=" + agenda.getId() + "'>Excluir</a></td>");
         }

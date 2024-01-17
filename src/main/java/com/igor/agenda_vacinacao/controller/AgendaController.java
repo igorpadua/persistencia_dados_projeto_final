@@ -45,6 +45,8 @@ public class AgendaController extends HttpServlet {
             case "listaFiltrada":
                 listaFiltrada(request, response);
                 break;
+            case "pesquisar":
+                pesquisarNomeUsuario(request, response);
         }
     }
 
@@ -170,12 +172,20 @@ public class AgendaController extends HttpServlet {
                         return 0;
                     }
                 });
-
                 break;
         }
 
         request.setAttribute("agendas", agendas);
         request.setAttribute("filtro", filtro);
+        request.getRequestDispatcher("agenda/listarAgenda.jsp").forward(request, response);
+    }
+
+    private void pesquisarNomeUsuario(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String nome = request.getParameter("pesquisa");
+        List<Agenda> agendas = agendaService.buscarTodos();
+        agendas.removeIf(agenda -> !agenda.getUsuario().getNome().toLowerCase().contains(nome.toLowerCase()));
+        request.setAttribute("agendas", agendas);
+        request.setAttribute("filtro", "Pesquisa");
         request.getRequestDispatcher("agenda/listarAgenda.jsp").forward(request, response);
     }
 }
