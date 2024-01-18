@@ -54,6 +54,7 @@ public class VacinaController extends HttpServlet {
         request.setAttribute("vacinaSalvo", vacina.getTitulo());
         listar(request, response);
     }
+
     private void listar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Vacina> vacinas = vacinaService.buscarTodos();
         request.setAttribute("vacinas", vacinas);

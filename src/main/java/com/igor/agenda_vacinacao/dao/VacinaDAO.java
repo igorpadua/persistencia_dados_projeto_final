@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public class VacinaDAO {
-    private EntityManager manager;
+    private final EntityManager manager;
 
     public VacinaDAO(EntityManager manager) {
         this.manager = manager;

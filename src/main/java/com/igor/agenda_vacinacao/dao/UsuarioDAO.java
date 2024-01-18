@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public class UsuarioDAO {
-    private EntityManager manager;
+    private final EntityManager manager;
 
     public UsuarioDAO(EntityManager manager) {
         this.manager = manager;

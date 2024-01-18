@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import java.util.List;
 
 public class AlergiaDAO {
-    private EntityManager manager;
+    private final EntityManager manager;
 
     public AlergiaDAO(EntityManager manager) {
         this.manager = manager;
