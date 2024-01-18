@@ -12,13 +12,16 @@
     <%
         Agenda agenda = (Agenda) request.getAttribute("agenda");
         Date data = agenda.getData();
-        String dataFormada = (data!= null) ? new SimpleDateFormat("yyyy-MM-dd").format(data) : "";
+        String dataFormada = (data != null) ? new SimpleDateFormat("yyyy-MM-dd").format(data) : "";
 
         Date dataSituacao = agenda.getDataSituacao();
-        String dataSituacaoFormada = (dataSituacao!= null) ? new SimpleDateFormat("yyyy-MM-dd").format(dataSituacao) : "";
+        String dataSituacaoFormada = (dataSituacao != null) ? new SimpleDateFormat("yyyy-MM-dd").format(dataSituacao) : "";
     %>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <h2>Editar agenda</h2>
@@ -38,8 +41,10 @@
         <label for="situacao">Situação</label>
         <select class="form-control" id="situacao" name="situacao">
             <option value="AGENDADO" <%=agenda.getSituacao() == Situacao.AGENDADO ? "selected" : ""%>>Agendado</option>
-            <option value="CANCELADO" <%=agenda.getSituacao() == Situacao.CANCELADO ? "selected" : ""%>>Cancelado</option>
-            <option value="REALIZADO" <%=agenda.getSituacao() == Situacao.REALIZADO ? "selected" : ""%>>Realizado</option>
+            <option value="CANCELADO" <%=agenda.getSituacao() == Situacao.CANCELADO ? "selected" : ""%>>Cancelado
+            </option>
+            <option value="REALIZADO" <%=agenda.getSituacao() == Situacao.REALIZADO ? "selected" : ""%>>Realizado
+            </option>
         </select>
     </div>
     <div class="form-group">

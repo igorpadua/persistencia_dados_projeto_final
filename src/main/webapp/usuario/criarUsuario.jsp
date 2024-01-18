@@ -4,8 +4,11 @@
 <html>
 <head>
     <title>Novo Usuario</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <h2>Novo usuário</h2>
@@ -41,26 +44,26 @@
             <option value="BA">Bahia</option>
             <option value="CE">Ceará</option>
             <option value="DF">Distrito Federal</option>
-            <option value="GO" >Goiás</option>
+            <option value="GO">Goiás</option>
             <option value="ES">Espírito Santo</option>
             <option value="MA">Maranhão</option>
             <option value="MT">Mato Grosso</option>
-            <option value="MS" >Mato Grosso do Sul</option>
+            <option value="MS">Mato Grosso do Sul</option>
             <option value="MG">Minas Gerais</option>
-            <option value="PA" >Pará</option>
-            <option value="PB" >Paraíba</option>
-            <option value="PR" >Paraná</option>
-            <option value="PE" >Pernambuco</option>
-            <option value="PI" >Piauí</option>
-            <option value="RJ" >Rio de Janeiro</option>
-            <option value="RN" >Rio Grande do Norte</option>
-            <option value="RS" >Rio Grande do Sul</option>
-            <option value="RO" >Rondônia</option>
-            <option value="RR" >Roraima</option>
-            <option value="SC" >Santa Catarina</option>
-            <option value="SP" >São Paulo</option>
-            <option value="SE" >Sergipe</option>
-            <option value="TO" >Tocantins</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
         </select>
     </div>
     <div class="form-control">
