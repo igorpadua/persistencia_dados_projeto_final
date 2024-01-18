@@ -14,7 +14,6 @@
 <body>
 <h1>Lista de Agendas</h1>
 
-<%--pesquisar--%>
 <form action="/agenda_vacinacao_war_exploded/agenda?acao=pesquisar" method="get">
     <input type="hidden" name="acao" value="pesquisar">
     <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar usuário" class="form-control">

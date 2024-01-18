@@ -83,8 +83,24 @@ public class AgendaController extends HttpServlet {
         agenda.setObservacao(request.getParameter("observacao"));
         agenda.setUsuario(usuarioService.buscarPorId(Long.parseLong(request.getParameter("usuario"))));
         agenda.setVacina(vacinaService.buscarPorId(Long.parseLong(request.getParameter("vacina"))));
-
         agendaService.salvar(agenda);
+
+        if (agenda.getVacina().getDoses() > 1) {
+            int periocidade = agenda.getVacina().getPeriodicidade();
+            int intervalo = agenda.getVacina().getIntervalo();
+            for (int i = 0; i < agenda.getVacina().getDoses() - 1; i++) {
+                Agenda agendaAux = new Agenda();
+                agendaAux.setData(FormatterDate.adicionarTempo(agenda.getData(), periocidade, intervalo + i));
+                agendaAux.setHora(agenda.getHora());
+                agendaAux.setSituacao(Situacao.AGENDADO);
+                agendaAux.setDataSituacao(agendaAux.getData());
+                agendaAux.setObservacao(agenda.getObservacao());
+                agendaAux.setUsuario(agenda.getUsuario());
+                agendaAux.setVacina(agenda.getVacina());
+                agendaService.salvar(agendaAux);
+            }
+        }
+
         listar(request, response);
     }
 
