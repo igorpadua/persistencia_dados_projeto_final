@@ -38,6 +38,12 @@ public class UsuarioController extends HttpServlet {
             case "alergias":
                 alergias(request, response);
                 break;
+            case "quantidadePessoasPorEstado":
+                List<Object[]> quantidadePessoasPorEstado = usuarioService.buscarQuantidadePessoasPorEstado();
+                request.setAttribute("quantidadePessoas", quantidadePessoasPorEstado);
+                RequestDispatcher rd = request.getRequestDispatcher("usuario/ufTotal.jsp");
+                rd.forward(request, response);
+                break;
         }
     }
 

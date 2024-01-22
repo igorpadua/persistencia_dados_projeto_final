@@ -42,4 +42,11 @@ public class UsuarioService {
         em.getTransaction().commit();
         return usuarios;
     }
+
+    public List<Object[]> buscarQuantidadePessoasPorEstado() {
+        em.getTransaction().begin();
+        List<Object[]> quantidadePessoasPorEstado = dao.buscarQuantidadePessoasPorEstado();
+        em.getTransaction().commit();
+        return quantidadePessoasPorEstado;
+    }
 }

@@ -31,4 +31,9 @@ public class UsuarioDAO {
     public List<Usuario> buscarTodos() {
         return this.manager.createQuery("SELECT u FROM Usuario u", Usuario.class).getResultList();
     }
+
+    // select count(*) as qtd_pessoas, uf from usuarios group by uf;
+    public List<Object[]> buscarQuantidadePessoasPorEstado() {
+        return this.manager.createQuery("SELECT count(*), uf FROM Usuario GROUP BY uf").getResultList();
+    }
 }

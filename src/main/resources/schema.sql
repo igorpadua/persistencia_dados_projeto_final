@@ -1,6 +1,8 @@
-CREATE DATABASE vacinacao;
+CREATE
+DATABASE vacinacao;
 
-USE vacinacao;
+USE
+vacinacao;
 
 CREATE TABLE vacinas
 (
