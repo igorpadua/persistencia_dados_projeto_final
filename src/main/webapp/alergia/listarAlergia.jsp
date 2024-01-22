@@ -18,6 +18,7 @@
     <tr>
         <th scope="col">ID</th>
         <th scope="col">Nome</th>
+        <th scope="col">Quantidade de pessoas</th>
         <th scope="col">Alterar</th>
         <th scope="col">Excluir</th>
     </tr>
@@ -29,6 +30,7 @@
             out.println("<tr>");
             out.println("<td>" + alergia.getId() + "</td>");
             out.println("<td>" + alergia.getNome() + "</td>");
+            out.println("<td>" + alergia.getUsuario().size() + "</td>");
             out.println("<td><a href='/agenda_vacinacao_war_exploded/alergia?acao=editar&id=" + alergia.getId() + "'>Alterar</a></td>");
             out.println("<td><a href='/agenda_vacinacao_war_exploded/alergia?acao=excluir&id=" + alergia.getId() + "'>Excluir</a></td>");
             out.println("</tr>");
